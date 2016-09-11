@@ -1,7 +1,7 @@
 .view_window{
 
-    width: 50%;
-    height: 400px;
+    width: 80%;
+    height: 500px;
     box-shadow: 1px 1px 1px black;
     margin: 20px auto;
     padding: 10px;
@@ -23,9 +23,14 @@
 .view_results{
   position: relative;
   width: 100%;
-  max-height: 90%;
+  max-height: 75%;
   overflow: auto;
+}
 
+.info{
+  text-align:center;
+  padding: 5px;
+  color: lightgray;
 }
 
 .line_command{
@@ -35,10 +40,24 @@
 }
 
 .v_comands{
-  color: white;
-  font-size: 12px;
+  color:white;
+  font-size: 13px;
+  line-height: 1.6;
   text-indent: 4px;
 }
+
+.v_comands:hover{
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.v_comands:active .cm .view_hours{
+  color: black;
+}
+
+.v_comands:active{
+  background-color: white;
+}
+
 
 .form-control{
   background-color: rgba(0,0,0,0.4);
@@ -62,4 +81,9 @@
   line-height: 1.4em;
   -webkit-appearance: textfield;
   appearance: textfield;
+}
+
+.insert_hours{
+  float: right;
+  margin-right: 10px;
 }

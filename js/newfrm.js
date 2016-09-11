@@ -1,11 +1,5 @@
 
 
-var is_using_bootstrap = false;
-const typeButtons = ["default", "primary", "success", "info", "warning", "danger", "link"];
-      typeButtons["size"] = ["lg", "sm", "xs", "block"];
-
-const GlyphIcons = ["asterisk", "plus", "euro", "minus", "cloud", "envelope"];
-
 const ColorsMyFrm = ["white", "#000000", "#696969", "#808080", "#A9A9A9", "#C0C0C0", "#D3D3D3", "#DCDCDC", "#6A5ACD", "#483D8B", "#191970", "#000080",
   "#00008B", "#0000CD", "#0000FF", "#6495ED", "#4169E1", "#1E90FF", "#00BFFF", "#87CEFA", "#87CEEB", "#ADD8E6", "#4682B4", "#B0C4DE",
   "#708090", "#778899", "#00FFFF", "#00CED1", "#40E0D0", "#48D1CC", "#20B2AA", "#008B8B", "#008B8B", "#7FFFD4", "#66CDAA", "#5F9EA0",
@@ -20,215 +14,6 @@ const ColorsMyFrm = ["white", "#000000", "#696969", "#808080", "#A9A9A9", "#C0C0
   "#F0FFFF", "#E0FFFF", "#B0E0E6", "#E0FFFF", "#F0FFF0", "#F5FFFA"];
 
 
-const UseBootstrap = function(){
-    var args = [arguments.length];
-    for(var i = 0; i<arguments.length; i++){
-        args[i] = arguments[i];
-    }
-    if(args.indexOf("css") >= 0){
-
-        var bs_element = document.createElement("link");
-        bs_element.setAttribute("href", "css/bootstrap.min.css");
-        bs_element.setAttribute("rel", "stylesheet");
-        document.head.appendChild(bs_element);
-    }
-    if(args.indexOf("js") >= 0){
-      var bs_element = [2];
-      bs_element[0] = document.createElement("script");
-      bs_element[1] = document.createElement("script");
-      bs_element[0].setAttribute("src", "js/bootstrap.min.js");
-      bs_element[1].setAttribute("src", "js/Jquery-3.1.0.min.js");
-      document.head.appendChild(bs_element[1]);
-      document.head.appendChild(bs_element[0]);
-    }
-
-    is_using_bootstrap = true;
-    return true;
-};
-
-
-const Selects = function(){
-    var elmts = [arguments.length];
-    for(var k = 0; k<arguments.length; k++){
-    if(arguments[k][0] != "."){ char = "#"; } else { char = ""; }
-    elmts[k] = char + arguments[k];
-    }
-
-    this.getElements = elmts;
-
-    this.ind = function(divbyid){
-
-
-
-        var args = arguments;
-
-        return {
-            IH:function(x){
-                var elements;
-                var exec;
-                var ihtml = new Array();
-                if(typeof(x) == "object" && x[0]!= "undefined"){
-                    exec = "element.innerHTML = ih[index]";
-                }else {
-                  exec = "element.innerHTML = ih";
-                }
-                for(var i = 0; i<args.length; i++){
-                    elements = AlterElement(elmts[args[i]], exec, x, i);
-                    ihtml[elmts[args[i]]] = elements.innerHTML;
-                }
-
-                return ihtml;
-            },
-
-            IHtml:function(x){
-                var elements;
-                var exec;
-                var ihtml = new Array();
-                if(typeof(x) == "object" && x[0]!= "undefined"){
-                    exec = "element.innerHTML = ih[index]";
-                }else {
-                  exec = "element.innerHTML = ih";
-                }
-                for(var i = 0; i<args.length; i++){
-                    elements = AlterElement(elmts[args[i]], exec, x, i);
-                    ihtml[elmts[args[i]]] += elements.innerHTML;
-                }
-
-                return ihtml;
-            },
-
-            Gicon:function(x, y, z){
-
-                var elements;
-
-                for(var i = 0; i<args.length; i++){
-                  elements = document.querySelector(elmts[args[i]]);
-                  var gicon = document.createElement("span");
-
-                  //Set a Collor To The glyphicon
-                  y_exists = y?true:false;
-                  if(y_exists && IS_ARRAY(y)){
-                      y[i]?typeof(y[i]) == "number"?gicon.style.color = ColorsMyFrm[y[i]]:gicon.style.color = y[i]:null;
-                  }else {
-                      y?typeof(y) == "number"?gicon.style.color = ColorsMyFrm[y]:gicon.style.color = y:null;
-                  }
-
-                  // Set a glyphicon To the Element
-                  if(IS_ARRAY(x)){
-                      elements?typeof(x[i])=="number"?gicon.className += " glyphicon glyphicon-" + GlyphIcons[x[i]]:gicon.className += " glyphicon glyphicon-"+x[i]:null;
-
-                  }else {
-
-                  elements?typeof(x)=="number"?gicon.className += " glyphicon glyphicon-" + GlyphIcons[x]:gicon.className += " glyphicon glyphicon-"+x:null;
-
-                  }
-
-                  var z_exists = z?true:false;
-                  if(z_exists && IS_ARRAY(z)){
-                      elements?gicon.innerHTML = z[i]:null;
-                  }else if(z_exists){
-                      elements?gicon.innerHTML = z:null;
-                  }
-
-                  elements.appendChild(gicon);
-
-
-
-                }
-
-                return true;
-            },
-
-            styleButton:function(x, y, z){
-
-
-                var elements;
-
-                for(var i = 0; i<args.length; i++){
-                  elements = document.querySelector(elmts[args[i]]);
-
-                  // Set a StyleButton To the Element
-                  if(IS_ARRAY(x)){
-                      elements?typeof(x[i])=="number"?elements.className += " btn btn-" + typeButtons[x[i]]:elements.className += " btn btn-"+x[i]:null;
-
-                  }else {
-
-                  elements?typeof(x)=="number"?elements.className += " btn btn-" + typeButtons[x]:elements.className += " btn btn-"+x:null;
-
-                  }
-                  var y_exists = typeof(y) != "undefined"?true:false;
-                  if(y_exists && IS_ARRAY(y)){
-                    elements?typeof(y[i])=="number"?elements.className += " btn-" + typeButtons["size"][y[i]]:elements.className += " btn-"+y[i]:null;
-
-                  }else if(y_exists){
-                    elements?typeof(y)=="number"?elements.className += " btn-" + typeButtons["size"][y]:elements.className += " btn-"+y:null;
-
-                  }
-
-                  var z_exists = z?true:false;
-                  if(z_exists && IS_ARRAY(z)){
-                      elements?elements.innerHTML = z[i]:null;
-                  }else if(z_exists){
-                      elements?elements.innerHTML = z:null;
-                  }
-
-                 }
-            },
-
-            addclass:function(x){
-                var element;
-                for(var i = 0; i<args.length; i++){
-                    element = document.querySelector(elmts[args[i]]);
-                    element?element.className += " "+x:null;
-                }
-                return true;
-            },
-
-            capt_key:function(x, y){
-                capt_key(elmts[divbyid], x, y);
-            },
-
-            SVL:function(x){
-
-                var element;
-                for(var i = 0; i<args.length; i++){
-                    if(IS_ARRAY(x)){
-                        element = document.querySelector(elmts[args[i]]);
-                        element.value = x[i];
-                    }else {
-                        element = document.querySelector(elmts[args[i]]);
-                        element.value = x;
-                    }
-                }
-                return true;
-            },
-
-            GVL:function(){
-
-              var element;
-              element = document.querySelector(elmts[divbyid]);
-
-              return element.value;
-
-            },
-            click:function(){
-                var element;
-                element = document.querySelector(elmts[divbyid]);
-
-                (function(){
-                  //element.submit();
-                  document.getElementById("cep").submit();
-                }());
-
-                return true;
-            },
-
-            dispar_event:function(){
-                capt_key(elmts[divbyid], x, y);
-            }
-        }
-    };
-};
 
 
 const capt_key = function(elm, key, act){
@@ -334,90 +119,40 @@ const report_error = function(x,y){
 
 const XMLHTTP = {
 
-
-$_acessform:function(url, divID, resposta, wait, redirect, condiction_redirect, Sucess){
-
-document.getElementById(divID).innerHTML = "<img src = '"+wait+"' >";
-var acess;
-if(window.XMLHttpRequest) {
-acess = new XMLHttpRequest();
-}
-else if(window.ActiveXObject) {
-acess = new ActiveXObject("Microsoft.XMLHTTP");
-}
-
-acess.open("GET", url, true);
-
-acess.onreadystatechange = function() {
-
-if(acess.readyState == 1) {
-document.getElementById(divID).innerHTML = '...';
-}
-
-if(acess.readyState == 4 && acess.status == 200) {
-var timeout;
-var answer = acess.responseText;
-if(resposta != -1){
-setTimeout(function() { document.getElementById(divID).innerHTML = resposta; }, 1500);
-}else {
-//document.getElementById(divID).innerHTML = answer;
-if(condiction_redirect != answer){
-setTimeout(function() { document.getElementById(divID).innerHTML = answer; }, 1500);
-}
-
-if(redirect != "" && typeof(redirect)!= "undefined"){
-if(answer == condiction_redirect){
-   if(Sucess != "" && typeof(Sucess)!= "undefined"){
-       setTimeout(document.getElementById(divID).innerHTML = Sucess, 1000);
-}
-
-setTimeout(function(){location.href = redirect; }, 2000);
-
-}
-}
-}
-
-}
-
-}
-acess.send(null);
-
-},
-
     $_acess:function(w, x, y, z){
 
 
     var acess = window.XMLHttpRequest?new XMLHttpRequest():window.ActiveObjectx?new ActiveObjectx("Microsoft.XMLHTTP"):null;
     var answer;
     var Obj_json;
-    var output;
+
     acess.open(y, w.url, true);
 
     y == "POST"?acess.setRequestHeader("Content-type", "application/x-www-form-urlencoded"):null;
 
     acess.onreadystatechange = function(){
 
-      output = "saida";
+
 
 
 
       if(acess.readyState == 1){
-        Obj_json = "carregando . . .";
+          Obj_json = "carregando . . .";
       }
       if(acess.readyState == 4 && acess.status == 200){
-        answer = acess.responseText;
-        z==true?Obj_json = JSON.parse(answer):null;
-        x(answer,Obj_json);
+          answer = acess.responseText;
+          z==true?Obj_json = JSON.parse(answer):null;
+          x(answer,Obj_json);
 
       }
 
     }
-    
+
     var data = "";
     if(y == "POST"){
-    for(propertys in w.data){
-     data += ""+propertys+"="+w.data[propertys]+"&";
-    }
+        for(propertys in w.data){
+         data += ""+propertys+"="+w.data[propertys]+"&";
+        }
     }
 
     y=="POST"?acess.send(data):acess.send(null);
