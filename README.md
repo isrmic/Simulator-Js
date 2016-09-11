@@ -18,4 +18,4 @@ Uma breve introdução para iniciar .
 - e var_name = value // é importante lembrar que se o valor for uma string ele deve estar entre aspas .
 se já quiser tambem predefinir uma variavel pode-se colocar em qualquer arquivo js mas recomendo deixar para ficar mais organizado em js/user.js e defina as variaveis e seus valores que pode-se utilizar .
 
-Sendo assim basta declarar a variavel no arquivouser.js e ao inicializar o simulador poderá usar seu valor , como por exemplo temos já uma variavel declarada chamada "wellcome" , execute @print #wellcome e a saída será seu valor .
+Sendo assim basta declarar a variavel no arquivo user.js e ao inicializar o simulador poderá usar seu valor , como por exemplo temos já uma variavel declarada chamada "wellcome" , execute @print #wellcome e a saída será seu valor .
