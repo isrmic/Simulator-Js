@@ -9,6 +9,8 @@ Uma breve introdução para iniciar .
 
 - Este simulador não faz nada de mais alem de executar códigos js como funções, declarações de variaveis , operações matematicas e algumas outras funções inclusas usando php .
 
+    OBS: Eu usei wamp server com php7 para execução de algumas funções funcionar !
+
 #declare variable
 
 - Mesmo que executando código javascript este mini prototipo não é perfeito e nem faz de tudo talvez nem todos os códigos e tambem então a declaração de uma variavel não usará o prefixo "var" , há 3 metodos de guardar um valor :
