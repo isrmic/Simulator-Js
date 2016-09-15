@@ -59,3 +59,17 @@ function acess(param, param2  = 1, param3 = "#viewer"){
   return true;
 
 }
+
+function readobj(obj, cond = false){
+  var getprop = "";
+  var value;
+    for(prop in obj){
+        value = cond == true ? " = " + obj[prop] : "";
+        getprop += "</br> <span class = 'prop'>" + prop + "</span>" + value;
+    }
+   return getprop;
+}
+
+function getElement(elm){
+    return document.querySelector(elm);
+}

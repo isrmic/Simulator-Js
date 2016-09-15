@@ -19,11 +19,6 @@ var func;
 
                 out = this.output(Command[0], Command.slice(1));
 
-                try{
-                  eval(Command.slice(1));
-                }catch(e){
-                  out = e;
-                }
 
             }else if(Command[0] == "@") {
                 //out = Command.split(" ");
@@ -39,7 +34,7 @@ var func;
             else if(Command.search(/[+|-|*|/|=]|%]|true|false|if|else|else if|Math|function|[()]/i) >= 0 ){
                 try{
                   exec = eval(Command)!== "undefined"?eval(Command):"empty";
-                  cond = /^[0-9|Math]|[()]/g.test(Command)?" = " + exec:"";
+                  cond = /^[0-9|Math]|[()]/g.test(Command)?exec:"";
                   out = Command + cond;
                   //this.insert(Command, true);
                 }catch(e){
@@ -83,8 +78,12 @@ var func;
               break;
 
               case "#":
-                  //exec = eval(val2);
-                  output = [true, "Comando Executado </br>  &nbsp&nbsp&nbsp&nbsp&nbsp  "+  val2];
+                  try{
+                      exec = val2 + eval(val2);
+                  }catch(e){
+                    exec = e;
+                  }
+                  output = [true, "Comando Executado ... </br>  &nbsp&nbsp&nbsp&nbsp&nbsp  "+ exec];
               break;
 
               case "@mkdir":
@@ -165,7 +164,7 @@ var func;
 
 
                   var val2 = val2.split(" ");
-                  val2[1] = val2[1]!=""?val2[1]:"";
+
 
                   try{
                     result = eval("Commands."+val2[0]+"("+val2[1]+")") !== "undefined"?eval("Commands."+val2[0]+"("+val2[1]+")"):"Sucesso Em Chamar , Mas Não Houve Nenhum Retorno";
@@ -244,7 +243,7 @@ var func;
                   view_command.className = "v_comands";
                   content = document.createTextNode(">> ");
                   view_command.appendChild(content);
-                  view_command.innerHTML += "<span class = 'cm'>" + command + " <div class ='insert_hours'>" +this.getDate()+ "</div> </span>";
+                  view_command.innerHTML += "<span class = 'cm'>" + command + " <span class ='insert_hours'>" +this.getDate()+ "</span> </span>";
                   element["#view"].appendChild(view_command);
 
               }
@@ -290,10 +289,20 @@ var func;
 
 
 
-
-
-
-
-
-
 })();
+
+var query = location.search.slice(1);
+var partes = query.split('&');
+var data = {};
+partes.forEach(function (parte) {
+    var chaveValor = parte.split('=');
+    var chave = chaveValor[0];
+    var valor = chaveValor[1];
+    data[chave] = valor;
+});
+
+
+
+function callback(){
+  alert('acionou o callback');
+}
